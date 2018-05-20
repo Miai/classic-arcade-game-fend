@@ -1,0 +1,16 @@
+{
+  "name": "classic-arcade-game",
+  "version": "1.0.0",
+  "description": "Classic Arcade Game",
+  "main": "",
+  "scripts": {
+    "build": "babel js -d js-es5"
+  },
+  "author": "Mihai Moraru",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  },
+  "dependencies": {}
+}
