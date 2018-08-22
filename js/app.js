@@ -1,4 +1,9 @@
 /*jshint esversion: 6 */
+var numRows = 6,
+    numCols = 5;
+    cWidth = 505;
+    cHeight = 606;
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -7,6 +12,8 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.x = 404;
+    this.y = 145;
 };
 
 // Update the enemy's position, required method for game
@@ -15,6 +22,10 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    let xArray = [0, 101, 202, 301, 401];
+    let yArray = [60, 145, 230];
+    console.log(this.x);
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -28,22 +39,36 @@ Enemy.prototype.render = function() {
 
 
 class Player {
-    constructor() {
+    constructor(sprite, x, y) {
         this.sprite = 'images/char-boy.png';
-        this.x = 101;
-        this.y = 83;
+        this.x = 202;
+        this.y = 400;
     }
 
     update(dt) {
-        alert(dt);
     }
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+        console.log(this.x, this.y);
     }
 
     handleInput(keyPress) {
-        console.log(keyPress);
+        switch(keyPress) {
+            case "left":
+                console.log ("left");
+                this.x -= 100;
+                break;
+            case "up":
+                this.y -= 83;
+                break;
+            case "right":
+                this.x += 100;
+                break;
+            case "down":
+                    this.y += 83;
+                break;
+        }
     }
 }
 
