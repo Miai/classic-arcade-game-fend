@@ -52,6 +52,9 @@ class Player {
     }
 
     update(dt) {
+        console.log (this.x, this.y);
+        this.winCondition(this.x, this.y);
+        this.constrainPlayerToMap(this.x, this.y);
     }
 
     render() {
@@ -72,6 +75,28 @@ class Player {
             case "down":
                     this.y += 83;
                 break;
+        }
+    }
+
+    winCondition(x, y) {
+        if (y < 0 ) {
+            console.log("you won!");
+            this.x = 202;
+            this.y = 400;
+        }
+    }
+
+    constrainPlayerToMap(x, y) {
+        if (x > 402) {
+            this.x = 402;
+        }
+
+        if (x < 2) {
+            this.x = 2;
+        }
+
+        if (y > 400) {
+            this.y = 400;
         }
     }
 }
