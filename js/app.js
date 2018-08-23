@@ -7,7 +7,6 @@ const numRows = 6,
     resourcesWidth = 101;
 
 /**
- * 
  * Random function that return a random value between the parameters
  * @param {number} min
  * @param {number} max
@@ -49,14 +48,15 @@ Enemy.prototype.update = function(dt) {
  * @param {number} py player Y coordinate
  */
 Enemy.prototype.handleCollision = function(ex, ey, px, py) {
-    let rectEnemy = {x: ex, y: ey, width: resourcesWidth-20, height: resourcesHeight};
-    let rectPlayer = {x: px, y: py, width: resourcesWidth-20, height: resourcesHeight};
+    let rectEnemy = {x: ex, y: ey, width: resourcesWidth-30, height: resourcesHeight};
+    let rectPlayer = {x: px, y: py, width: resourcesWidth-30, height: resourcesHeight};
 
     if (rectPlayer.x < rectEnemy.x + rectEnemy.width &&
         rectPlayer.x + rectPlayer.width > rectEnemy.x &&
         rectPlayer.y < rectEnemy.y + rectEnemy.height &&
         rectPlayer.height + rectPlayer.y > rectEnemy.y) {
         // collision detected | reset player position
+        alert("Be more careful!");
         player.x = 202;
         player.y = 404;
     }
@@ -70,10 +70,10 @@ Enemy.prototype.render = function() {
 
 class Player {
     /**
-     * 
-     * @param {string} sprite 
-     * @param {number} x 
-     * @param {number} y 
+     * Initializing the Player class
+     * @param {string} sprite
+     * @param {number} x
+     * @param {number} y
      */
     constructor(sprite, x, y) {
         this.sprite = sprite;
@@ -96,7 +96,7 @@ class Player {
 
     /**
      * Update Player position based on user input
-     * @param {string} keyPress 
+     * @param {string} keyPress
      */
     handleInput(keyPress) {
         switch(keyPress) {
