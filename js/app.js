@@ -1,10 +1,17 @@
 /*jshint esversion: 6 */
-var numRows = 6,
+const numRows = 6,
     numCols = 5;
     cWidth = 505;
     cHeight = 606;
+    resourcesHeight = 85;
+    resourcesWidth = 101;
 
-var speed = function (min, max) {
+/**
+ * Random function that return a random value between the parameters
+ * @param {number} min 
+ * @param {number} max 
+ */
+let speed = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
@@ -24,13 +31,33 @@ var Enemy = function(sprite, x, y) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
     this.x += this.speed * dt;
     if (this.x > 505) {
-        this.x = -100;
+        this.x = -resourcesWidth;
         this.speed = speed (50,500);
+    }
+    this.handleCollision(this.x, this.y, player.x, player.y);
+};
+
+/**
+ * Detects collisions between rectangles around the sprite
+ * added some margins for the width to handle the .png transparent bg
+ * @param {number} ex enemy X coordinate
+ * @param {number} ey enemy Y coordinate
+ * @param {number} px player X coordinate
+ * @param {number} py player Y coordinate
+ */
+Enemy.prototype.handleCollision = function(ex, ey, px, py) {
+    let rectEnemy = {x: ex, y: ey, width: resourcesWidth-20, height: resourcesHeight};
+    let rectPlayer = {x: px, y: py, width: resourcesWidth-20, height: resourcesHeight};
+
+    if (rectPlayer.x < rectEnemy.x + rectEnemy.width &&
+        rectPlayer.x + rectPlayer.width > rectEnemy.x &&
+        rectPlayer.y < rectEnemy.y + rectEnemy.height &&
+        rectPlayer.height + rectPlayer.y > rectEnemy.y) {
+        // collision detected | reset player position
+        player.x = 202;
+        player.y = 404;
     }
 };
 
@@ -39,11 +66,11 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-
-
 class Player {
     constructor(sprite, x, y) {
         this.sprite = sprite;
@@ -52,7 +79,6 @@ class Player {
     }
 
     update(dt) {
-        console.log (this.x, this.y);
         this.winCondition(this.x, this.y);
         this.constrainPlayerToMap(this.x, this.y);
     }
@@ -64,23 +90,23 @@ class Player {
     handleInput(keyPress) {
         switch(keyPress) {
             case "left":
-                this.x -= 100;
+                this.x -= resourcesWidth;
                 break;
             case "up":
-                this.y -= 83;
+                this.y -= resourcesHeight;
                 break;
             case "right":
-                this.x += 100;
+                this.x += resourcesWidth;
                 break;
             case "down":
-                    this.y += 83;
+                    this.y += resourcesHeight;
                 break;
         }
     }
 
     winCondition(x, y) {
         if (y < 0 ) {
-            console.log("you won!");
+            alert("you won!");
             this.x = 202;
             this.y = 400;
         }
@@ -108,11 +134,14 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [
-    new Enemy('images/enemy-bug.png', -100, 63),
-    new Enemy('images/enemy-bug.png', -50, 143),
-    new Enemy('images/enemy-bug.png', -20, 223)
+    new Enemy('images/enemy-bug.png', -20,  60),
+    new Enemy('images/enemy-bug.png', -60, 60),
+    new Enemy('images/enemy-bug.png', -100, 145),
+    new Enemy('images/enemy-bug.png', -50, 145),
+    new Enemy('images/enemy-bug.png', -20, 230),
+    new Enemy('images/enemy-bug.png', -110, 230)
 ];
-var player = new Player('images/char-boy.png', 202, 400);
+var player = new Player('images/char-boy.png', 202, 404);
 
 
 // This listens for key presses and sends the keys to your
