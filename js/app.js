@@ -7,9 +7,10 @@ const numRows = 6,
     resourcesWidth = 101;
 
 /**
+ * 
  * Random function that return a random value between the parameters
- * @param {number} min 
- * @param {number} max 
+ * @param {number} min
+ * @param {number} max
  */
 let speed = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -67,17 +68,23 @@ Enemy.prototype.render = function() {
 };
 
 
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
 class Player {
+    /**
+     * 
+     * @param {string} sprite 
+     * @param {number} x 
+     * @param {number} y 
+     */
     constructor(sprite, x, y) {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Constantantly updates the player position
+     * @param {number} dt
+     */
     update(dt) {
         this.winCondition(this.x, this.y);
         this.constrainPlayerToMap(this.x, this.y);
@@ -87,6 +94,10 @@ class Player {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
+    /**
+     * Update Player position based on user input
+     * @param {string} keyPress 
+     */
     handleInput(keyPress) {
         switch(keyPress) {
             case "left":
@@ -104,6 +115,11 @@ class Player {
         }
     }
 
+    /**
+     * Method to determine the win condition for Player
+     * @param {number} x 
+     * @param {number} y 
+     */
     winCondition(x, y) {
         if (y < 0 ) {
             alert("you won!");
@@ -112,15 +128,20 @@ class Player {
         }
     }
 
+    /**
+     * Method to constrain the player to the map
+     * @param {number} x
+     * @param {number} y
+     */
     constrainPlayerToMap(x, y) {
-        if (x > 402) {
-            this.x = 402;
+        if (x > (cWidth - resourcesWidth)) {
+            this.x = (cWidth - resourcesWidth);
         }
 
-        if (x < 2) {
-            this.x = 2;
+        if (x < 0) {
+            this.x = 0;
         }
-
+        // TODO: make it dynamic maybe
         if (y > 400) {
             this.y = 400;
         }
