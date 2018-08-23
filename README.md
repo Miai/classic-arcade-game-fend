@@ -4,9 +4,10 @@ Classic game where you'll have to move your character to reach the water while a
 
 ## Getting Started
 
-Clone the project locally and run in browser.
+Clone or download the ZIP of the project.
+Run index.html
 
-Alternatively you can find it here [https://miai.github.com]
+Alternatively you can find it here [https://miai.github.io/classic-arcade-game/index.html]
 
 ## Authors
 
