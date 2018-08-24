@@ -16,5 +16,5 @@ Alternatively you can find it here [https://miai.github.io/classic-arcade-game/i
 
 ## Acknowledgments
 
-* Used this to understand better 2D collisions - https://developer.mozilla.org/kab/docs/Games/Techniques/2D_collision_detection
+* Used this to understand better 2D collisions - https://developer.mozilla.org/docs/Games/Techniques/2D_collision_detection
 
